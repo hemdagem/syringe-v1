@@ -1,10 +1,3 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/l8lcjqu5q0ld1je9?svg=true)](https://ci.appveyor.com/project/yetanotherchris/syringe-4kmo4)
-[![Documentation Status](https://readthedocs.org/projects/syringe/badge/?version=latest)](http://syringe.readthedocs.io/en/latest/?badge=latest)
-[![Coverage Status](https://coveralls.io/repos/github/TotalJobsGroup/syringe/badge.svg?branch=master)](https://coveralls.io/github/TotalJobsGroup/syringe?branch=master)
-[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/TotalJobsGroup/Syringe.svg)](http://isitmaintained.com/project/TotalJobsGroup/Syringe "Average time to resolve an issue") 
-[![Percentage of issues still open](http://isitmaintained.com/badge/open/TotalJobsGroup/Syringe.svg)](http://isitmaintained.com/project/TotalJobsGroup/Syringe "Percentage of issues still open")
-[![release](https://img.shields.io/badge/release-1.0.599-brightgreen.svg?style=flat)](https://github.com/totaljobsgroup/syringe/releases/latest)
-
 # Syringe
 Syringe is a .NET automated HTTP testing tool for headless, Javascript-ignorant tests.
 
@@ -48,10 +41,6 @@ Syringe uses OAuth2 for its security. It currently supports Github, Google and M
 * [Register an Syringe OAuth2 app in Github](https://github.com/settings/developers). The callback url should be `http://localhost:1980`
 * Edit the configuration.json file in the service directory to use the OAuth2 client id/secret.
 
-
-## Downloading & Installing from Binaries
-
-You can get the latest release of Syringe **[HERE](https://github.com/TotalJobsGroup/Syringe/releases)**
 
 ### Installing Website
 
