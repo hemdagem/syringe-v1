@@ -1,0 +1,52 @@
+{
+  "Tests": [
+    {
+      "Description": "Upload image",
+      "Method": "POST",
+      "Url": "{baseurl}",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [
+        {
+          "Name": "deletionUrl",
+          "Regex": "(http://postimg.org/delete/.+/)<",
+          "PostProcessorType": 1
+        }
+      ],
+      "Assertions": [],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": "UploadFile.snippet"
+      }
+    },
+    {
+      "Description": "Delete image",
+      "Method": "POST",
+      "Url": "{deletionUrl}",
+      "PostBody": "delete=Delete",
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [],
+      "Assertions": [
+        {
+          "Description": "Succesful post",
+          "AssertionMethod": 0,
+          "Value": "Upload another image",
+          "AssertionType": 0
+        }
+      ],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    }
+  ],
+  "Variables": [
+    {
+      "Name": "baseurl",
+      "Value": "http://postimage.org",
+      "Environment": {
+        "Name": "Development"
+      }
+    }
+  ]
+}

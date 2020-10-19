@@ -1,0 +1,22 @@
+//
+// SUMMARY:
+// You can alter the request and test file before it is run using C# script. Two variables are available:
+// * Test(Syringe.Core.Tests.Test). This contains information for the test.
+// * Request(Restsharp.IRestRequest). This is the HTTP request sent to the server
+// * Configuration(Syringe.Core.Configuration.IConfigration). This contains all Syringe runtime configuration options.
+//
+// WARNING: 
+// If you enable this feature, you should trust the people who are using Syringe.
+// The Syringe service should run as a restricted user, typically with Power User group access
+// (in order to have network access). The snippets will have IO and Network access, so the
+// feature is not typically something you would use in a hosted environment.
+//
+// EXAMPLE:
+// The example below will add "cows.jpg" to the "upload[]" input field on the page, before
+// the Syringe request is executed. This is an example of a file upload.
+//
+
+using System.IO;
+
+string fullPath = Path.Combine(Configuration.TestFilesBaseDirectory, "cows.jpg");
+Request.AddFile("upload[]", fullPath);

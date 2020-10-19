@@ -1,0 +1,22 @@
+﻿[
+	{
+		"Name": "Staging",
+		"Order": 4
+	},
+	{
+		"Name": "Production",
+		"Order": 5
+	},
+	{
+		"Name": "DevTeam1",
+		"Order": 1
+	},
+	{
+		"Name": "DevTeam2",
+		"Order": 2
+	},
+	{
+		"Name": "UAT",
+		"Order": 3
+	}
+]

@@ -1,0 +1,208 @@
+{
+  "Tests": [
+    {
+      "Description": "search for a random number 1",
+      "Method": "GET",
+      "Url": "{baseurl}/search?q={_randomNumber}",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [],
+      "Assertions": [],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "search for a random number 2",
+      "Method": "GET",
+      "Url": "{baseurl}/search?q={_randomNumber}",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [],
+      "Assertions": [],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "search for a random number 3",
+      "Method": "GET",
+      "Url": "{baseurl}/search?q={_randomNumber}",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [],
+      "Assertions": [],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "search for a random number 4",
+      "Method": "GET",
+      "Url": "{baseurl}/search?q={_randomNumber}",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [],
+      "Assertions": [],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "search for a random number 5",
+      "Method": "GET",
+      "Url": "{baseurl}/search?q={_randomNumber}",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [],
+      "Assertions": [],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "search for a random number 6",
+      "Method": "GET",
+      "Url": "{baseurl}/search?q={_randomNumber}",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [],
+      "Assertions": [],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "search for a random number 7",
+      "Method": "GET",
+      "Url": "{baseurl}/search?q={_randomNumber}",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [],
+      "Assertions": [],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "search for a random number 8",
+      "Method": "GET",
+      "Url": "{baseurl}/search?q={_randomNumber}",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [],
+      "Assertions": [],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "search for a random number 9",
+      "Method": "GET",
+      "Url": "{baseurl}/search?q={_randomNumber}",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [],
+      "Assertions": [],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "search for a random number 10",
+      "Method": "GET",
+      "Url": "{baseurl}/search?q={_randomNumber}",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [],
+      "Assertions": [],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "search for a random number 11",
+      "Method": "GET",
+      "Url": "{baseurl}/search?q={_randomNumber}",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [],
+      "Assertions": [],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "search for a random number 12",
+      "Method": "GET",
+      "Url": "{baseurl}/search?q={_randomNumber}",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [],
+      "Assertions": [],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "search for a random number 13",
+      "Method": "GET",
+      "Url": "{baseurl}/search?q={_randomNumber}",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [],
+      "Assertions": [],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "search for a random number 14",
+      "Method": "GET",
+      "Url": "{baseurl}/search?q={_randomNumber}",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [],
+      "Assertions": [],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "search for a random number 15",
+      "Method": "GET",
+      "Url": "{baseurl}/search?q={_randomNumber}",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [],
+      "Assertions": [],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    }
+  ],
+  "Variables": [
+    {
+      "Name": "baseurl",
+      "Value": "http://www.bing.com",
+      "Environment": {
+        "Name": "Development"
+      }
+    }
+  ]
+}

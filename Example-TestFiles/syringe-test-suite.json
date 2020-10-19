@@ -1,0 +1,917 @@
+{
+  "Tests": [
+    {
+      "Description": "Landing Page",
+      "Method": "GET",
+      "Url": "{baseurl}",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [
+        {
+          "Name": "new-test-file-page-path",
+          "Regex": "<a .*?title=\"Add Test File\".*?href=\"(.*?)\">",
+          "PostProcessorType": 1
+        },
+        {
+          "Name": "all-results-path",
+          "Regex": "<a.*?href=\"(.*?)\".*?>All results",
+          "PostProcessorType": 1
+        },
+        {
+          "Name": "settings-path",
+          "Regex": "<a.*?href=\"(.*?)\".*?>Settings",
+          "PostProcessorType": 1
+        },
+        {
+          "Name": "encryption-path",
+          "Regex": "<a.*?href=\"(.*?)\".*?>Encrypt data",
+          "PostProcessorType": 1
+        },
+        {
+          "Name": "todays-results-path",
+          "Regex": "<a.*?href=\"(.*?)\".*?>Today&#39;s results",
+          "PostProcessorType": 1
+        }
+      ],
+      "Assertions": [
+        {
+          "Description": "Should be running in guest mode",
+          "AssertionMethod": 0,
+          "Value": "<h1>Login",
+          "AssertionType": 1
+        },
+        {
+          "Description": "Should display H2",
+          "AssertionMethod": 0,
+          "Value": "<h2>Test Files",
+          "AssertionType": 0
+        },
+        {
+          "Description": "Should contain add button",
+          "AssertionMethod": 0,
+          "Value": "<i(.*?)>add",
+          "AssertionType": 0
+        },
+        {
+          "Description": "Should not have test file (please delete)",
+          "AssertionMethod": 0,
+          "Value": "<td class=\"filename\">{test-file-name}.json",
+          "AssertionType": 1
+        },
+        {
+          "Description": "Should not have copy of test file (please delete)",
+          "AssertionMethod": 0,
+          "Value": "<td class=\"filename\">{test-file-copy-name}.json",
+          "AssertionType": 1
+        }
+      ],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "New test file page",
+      "Method": "GET",
+      "Url": "{baseurl}{new-test-file-page-path}",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [
+        {
+          "Name": "create-new-test-file-path",
+          "Regex": "<form action=\"(.*?)\".*?",
+          "PostProcessorType": 1
+        }
+      ],
+      "Assertions": [
+        {
+          "Description": "Should be on add test page",
+          "AssertionMethod": 0,
+          "Value": "<title>Add test - Syringe<\\/title>",
+          "AssertionType": 0
+        }
+      ],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "Create new test file",
+      "Method": "POST",
+      "Url": "{baseurl}{create-new-test-file-path}",
+      "PostBody": "Filename={test-file-name}",
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [
+        {
+          "Name": "edit-test-file-path",
+          "Regex": "<a title=\"Edit Test File\".*?href=\"(.*?{test-file-name}\\.json)\">",
+          "PostProcessorType": 1
+        },
+        {
+          "Name": "copy-test-file-path",
+          "Regex": "<form.*?action=\"(.*?Copy.*?)\".*?>",
+          "PostProcessorType": 1
+        },
+        {
+          "Name": "delete-test-file-path",
+          "Regex": "<form.*?action=\"(.*?Delete.*?)\".*?>",
+          "PostProcessorType": 0
+        }
+      ],
+      "Assertions": [
+        {
+          "Description": "Should display expected H2",
+          "AssertionMethod": 0,
+          "Value": "<h2>Test Files</h2>",
+          "AssertionType": 0
+        },
+        {
+          "Description": "Should display test file in window",
+          "AssertionMethod": 0,
+          "Value": "<td class=\"filename\">{test-file-name}.json<\\/td>",
+          "AssertionType": 0
+        }
+      ],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "Edit test file",
+      "Method": "GET",
+      "Url": "{baseurl}{edit-test-file-path} ",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [
+        {
+          "Name": "view-variables-path",
+          "Regex": "<a.*?href=\"(.*?filename={test-file-name}.json.*?)\">Variables<\\/a>",
+          "PostProcessorType": 1
+        }
+      ],
+      "Assertions": [
+        {
+          "Description": "Should be on edit test page",
+          "AssertionMethod": 0,
+          "Value": "<title>Viewing {test-file-name}.json - Syringe<\\/title>",
+          "AssertionType": 0
+        }
+      ],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "View variables page",
+      "Method": "GET",
+      "Url": "{baseurl}{view-variables-path}",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [
+        {
+          "Name": "edit-variables-path",
+          "Regex": "<form action=\"(.*?{test-file-name}.*?)\" method=\"post\".*?>",
+          "PostProcessorType": 1
+        }
+      ],
+      "Assertions": [],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "Should create variable",
+      "Method": "POST",
+      "Url": "{baseurl}{edit-variables-path}",
+      "PostBody": "Filename={test-file-name}.json&Variables%5B0%5D.Environment=Development&Variables%5B0%5D.Name={variable-name}&Variables%5B0%5D.Value={variable-value}",
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [
+        {
+          "Name": "view-new-test-path",
+          "Regex": "<a.*?href=\"(.*?{test-file-name}.json.*?)\">Add",
+          "PostProcessorType": 1
+        }
+      ],
+      "Assertions": [],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "Ensure variables are saved",
+      "Method": "GET",
+      "Url": "{baseurl}{view-variables-path}",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [],
+      "Assertions": [
+        {
+          "Description": "Should contain variable title",
+          "AssertionMethod": 0,
+          "Value": "<input.*?value=\"{variable-name}\" \\/>",
+          "AssertionType": 0
+        },
+        {
+          "Description": "Should contain variable value",
+          "AssertionMethod": 0,
+          "Value": "<input.*?value=\"{variable-value}\" \\/>",
+          "AssertionType": 0
+        },
+        {
+          "Description": "Should contain env",
+          "AssertionMethod": 0,
+          "Value": "<option selected=\"selected\" value=\"Development\">Development<\\/option>",
+          "AssertionType": 0
+        }
+      ],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "View new test page",
+      "Method": "GET",
+      "Url": "{baseurl}{view-new-test-path}",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [
+        {
+          "Name": "create-new-test-url",
+          "Regex": "<form.*?action=\"(.*?{test-file-name}.*?)\"",
+          "PostProcessorType": 1
+        }
+      ],
+      "Assertions": [
+        {
+          "Description": "Should display available variables",
+          "AssertionMethod": 0,
+          "Value": "Available variables",
+          "AssertionType": 0
+        },
+        {
+          "Description": "Should contain  variables name input",
+          "AssertionMethod": 0,
+          "Value": "<input.*?id=\"{variable-name}\".*?value=\"{{variable-name}}\".*?>",
+          "AssertionType": 0
+        },
+        {
+          "Description": "Should contain  variables value input",
+          "AssertionMethod": 0,
+          "Value": "<input.*?value=\"{variable-value}\".*?>",
+          "AssertionType": 0
+        }
+      ],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "Create new test",
+      "Method": "POST",
+      "Url": "{baseurl}{create-new-test-url}",
+      "PostBody": "Description=DESCRIPTION-HERE&Url=URL-HERE&Method=1&ExpectedHttpStatusCode=302&PostBody=POST-HERE&Headers%5B0%5D.Key=HEADER-KEY-HERE&Headers%5B0%5D.Value=HEADER-VALUE-HERE&CapturedVariables%5B0%5D.Name=CAPTURED-TEST-NAME-HERE&CapturedVariables%5B0%5D.Regex=CAPTURED-TEST-REGEX-HERE&CapturedVariables%5B0%5D.PostProcessorType=1&Assertions%5B0%5D.Description=ASSERTION-TITLE-HERE&Assertions%5B0%5D.Value=ASSERTION-VAL-HERE&Assertions%5B0%5D.AssertionType=0&Assertions%5B0%5D.AssertionMethod=0&BeforeExecuteScript=SCRIPT-HERE",
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [
+        {
+          "Name": "view-test-path",
+          "Regex": "<a.*?href=\"(.*?Edit.*?{test-file-name}.*?)\">",
+          "PostProcessorType": 1
+        },
+        {
+          "Name": "copy-test-path",
+          "Regex": "<form.*?action=\"(.*?Copy.*?)\".*?>",
+          "PostProcessorType": 1
+        },
+        {
+          "Name": "delete-test-path",
+          "Regex": "<form.*?action=\"(.*?Delete.*?)\".*?>",
+          "PostProcessorType": 0
+        }
+      ],
+      "Assertions": [],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "View test case page",
+      "Method": "GET",
+      "Url": "{baseurl}{view-test-path}",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [
+        {
+          "Name": "cancel-test-path",
+          "Regex": "<a.*?href=\"(.*?)\".*?>Cancel",
+          "PostProcessorType": 1
+        }
+      ],
+      "Assertions": [
+        {
+          "Description": "Should contain captured variables name input",
+          "AssertionMethod": 0,
+          "Value": "<input.*?id=\"CAPTURED-TEST-NAME-HERE\".*?value=\"{CAPTURED-TEST-NAME-HERE}\".*?>",
+          "AssertionType": 0
+        },
+        {
+          "Description": "Should contain captured variables value input",
+          "AssertionMethod": 0,
+          "Value": "<input.*?value=\"CAPTURED-TEST-REGEX-HERE\".*?>",
+          "AssertionType": 0
+        },
+        {
+          "Description": "Should contain variables name input",
+          "AssertionMethod": 0,
+          "Value": "<input.*?id=\"{variable-name}\".*?value=\"{{variable-name}}\".*?>",
+          "AssertionType": 0
+        },
+        {
+          "Description": "Should contain variables value input",
+          "AssertionMethod": 0,
+          "Value": "<input.*?value=\"{variable-value}\".*?>",
+          "AssertionType": 0
+        },
+        {
+          "Description": "Should contain expected description",
+          "AssertionMethod": 0,
+          "Value": "<input.*?value=\"DESCRIPTION-HERE\"",
+          "AssertionType": 0
+        },
+        {
+          "Description": "Should contain expected URL",
+          "AssertionMethod": 0,
+          "Value": "<input.*?value=\"URL-HERE\"",
+          "AssertionType": 0
+        },
+        {
+          "Description": "Should contain expected METHOD",
+          "AssertionMethod": 0,
+          "Value": "<option selected=\"selected\" value=\"1\">POST",
+          "AssertionType": 0
+        },
+        {
+          "Description": "Should contain expected HTTP Status",
+          "AssertionMethod": 0,
+          "Value": "<option selected=\"selected\" value=\"302\">Redirect \\(302\\)",
+          "AssertionType": 0
+        },
+        {
+          "Description": "Should contain expected Post Body",
+          "AssertionMethod": 0,
+          "Value": "<textarea.*?name=\"PostBody\".*?>.*?\\n.*?POST-HERE",
+          "AssertionType": 0
+        },
+        {
+          "Description": "Should contain expected Header Key",
+          "AssertionMethod": 0,
+          "Value": "<input.*?value=\"HEADER-KEY-HERE\"",
+          "AssertionType": 0
+        }
+      ],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "Cancel test case",
+      "Method": "GET",
+      "Url": "{baseurl}{cancel-test-path}",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [
+        {
+          "Name": "view-test-path",
+          "Regex": "<a.*?href=\"(.*?Edit.*?{test-file-name}.*?)\">",
+          "PostProcessorType": 1
+        }
+      ],
+      "Assertions": [],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "Create runnable test",
+      "Method": "POST",
+      "Url": "{baseurl}{create-new-test-url}",
+      "PostBody": "Description=Google+Test&Url=http%3A%2F%2Fgoogle.com&Method=0&ExpectedHttpStatusCode=200&PostBody=&Assertions%5B0%5D.Description=Should+contain+the+word+google&Assertions%5B0%5D.Value=Google&Assertions%5B0%5D.AssertionType=0&Assertions%5B0%5D.AssertionMethod=0&BeforeExecuteScript=",
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [],
+      "Assertions": [],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "Run new test file and wait",
+      "Method": "GET",
+      "Url": "{serviceurl}/api/task/runTestFile?filename={test-file-name}.json&environment=Development&username=Syringe-Accept-Tests",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [
+        {
+          "Name": "test-run-guid",
+          "Regex": "\"ResultId\":.*?\\n?.*?\"(.*?)\"",
+          "PostProcessorType": 0
+        }
+      ],
+      "Assertions": [
+        {
+          "Description": "Should complete",
+          "AssertionMethod": 0,
+          "Value": "\"Finished\":.*?true",
+          "AssertionType": 0
+        },
+        {
+          "Description": "Should have failed tests",
+          "AssertionMethod": 0,
+          "Value": "\"HasFailedTests\":.*?true",
+          "AssertionType": 0
+        }
+      ],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "View all test results",
+      "Method": "GET",
+      "Url": "{baseurl}{all-results-path} ",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [
+        {
+          "Name": "test-run-path",
+          "Regex": "<a.*?href=\"(.*?{test-run-guid}.*?)\">View",
+          "PostProcessorType": 1
+        }
+      ],
+      "Assertions": [
+        {
+          "Description": "Should have a test run for test file",
+          "AssertionMethod": 0,
+          "Value": "{test-file-name}",
+          "AssertionType": 0
+        },
+        {
+          "Description": "Should have test GUID on page",
+          "AssertionMethod": 0,
+          "Value": "{test-run-guid}",
+          "AssertionType": 0
+        }
+      ],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "View results of test",
+      "Method": "GET",
+      "Url": "{baseurl}{test-run-path}",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [
+        {
+          "Name": "test-run-view-log-path",
+          "Regex": "<a.*?href=\"(.*?)\">View Log",
+          "PostProcessorType": 1
+        },
+        {
+          "Name": "test-run-view-http-log-path",
+          "Regex": "<a.*?href=\"(.*?resultId=1.*?)\">View HTTP Log",
+          "PostProcessorType": 1
+        },
+        {
+          "Name": "test-run-view-empty-html-path",
+          "Regex": "<a.*?href=\"(.*?)\">View HTML",
+          "PostProcessorType": 1
+        },
+        {
+          "Name": "test-run-view-html-path",
+          "Regex": "<a.*?href=\"(.*?resultId=1.*?)\">View HTML",
+          "PostProcessorType": 1
+        },
+        {
+          "Name": "test-run-edit-test-button",
+          "Regex": "<a.*?href=\"(.*?resultId=1.*?)\">Edit",
+          "PostProcessorType": 1
+        },
+        {
+          "Name": "test-run-delete-path",
+          "Regex": "<form.*?action=\"(.*?Delete.*?)\"",
+          "PostProcessorType": 1
+        }
+      ],
+      "Assertions": [
+        {
+          "Description": "Should have one failed test",
+          "AssertionMethod": 0,
+          "Value": "1.*? Tests Failed",
+          "AssertionType": 0
+        },
+        {
+          "Description": "Should have one passed test",
+          "AssertionMethod": 0,
+          "Value": "1.*? Tests Passed",
+          "AssertionType": 0
+        },
+        {
+          "Description": "Should have expected title",
+          "AssertionMethod": 0,
+          "Value": "Results for {test-file-name}.json",
+          "AssertionType": 0
+        },
+        {
+          "Description": "Should have dummy test header",
+          "AssertionMethod": 0,
+          "Value": "DESCRIPTION-HERE",
+          "AssertionType": 0
+        },
+        {
+          "Description": "Should error message for dummy url",
+          "AssertionMethod": 0,
+          "Value": "URL-HERE is not a valid Uri[\\n\\r\\s]+Parameter name: url",
+          "AssertionType": 0
+        }
+      ],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "View test case log",
+      "Method": "GET",
+      "Url": "{baseurl}{test-run-view-log-path}",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [],
+      "Assertions": [
+        {
+          "Description": "Should display expected error message",
+          "AssertionMethod": 0,
+          "Value": "System.ArgumentException: URL-HERE is not a valid Uri",
+          "AssertionType": 0
+        }
+      ],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "View test case HTTP log",
+      "Method": "GET",
+      "Url": "{baseurl}{test-run-view-http-log-path} ",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [],
+      "Assertions": [
+        {
+          "Description": "Should query google",
+          "AssertionMethod": 0,
+          "Value": "GET http://google.com",
+          "AssertionType": 0
+        }
+      ],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "View test case HTML",
+      "Method": "GET",
+      "Url": "{baseurl}{test-run-view-html-path}",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [],
+      "Assertions": [
+        {
+          "Description": "Should contain the word google",
+          "AssertionMethod": 0,
+          "Value": "Google",
+          "AssertionType": 0
+        }
+      ],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "View edit test case from results button",
+      "Method": "GET",
+      "Url": "{baseurl}{test-run-edit-test-button}",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [],
+      "Assertions": [
+        {
+          "Description": "Should contain test file name",
+          "AssertionMethod": 0,
+          "Value": "{test-file-name}.json",
+          "AssertionType": 0
+        }
+      ],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "Run new test file",
+      "Method": "POST",
+      "Url": "{baseurl}/home/run",
+      "PostBody": "filename={test-file-name}.json&environment=Development",
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [],
+      "Assertions": [
+        {
+          "Description": "Should be running test file",
+          "AssertionMethod": 0,
+          "Value": "Running {test-file-name}.json",
+          "AssertionType": 0
+        }
+      ],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "Run new test file for deleting",
+      "Method": "GET",
+      "Url": "{serviceurl}/api/task/runTestFile?filename={test-file-name}.json&environment=Development&username=Syringe-Accept-Tests",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [
+        {
+          "Name": "test-run-guid-to-delete",
+          "Regex": "\"ResultId\":.*?\\n?.*?\"(.*?)\"",
+          "PostProcessorType": 0
+        }
+      ],
+      "Assertions": [],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "Delete test result",
+      "Method": "POST",
+      "Url": "{baseurl}{test-run-delete-path}",
+      "PostBody": "id={test-run-guid-to-delete}",
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [],
+      "Assertions": [
+        {
+          "Description": "Should not contain test guid",
+          "AssertionMethod": 0,
+          "Value": "{test-run-guid-to-delete}",
+          "AssertionType": 1
+        },
+        {
+          "Description": "Should be on Results page",
+          "AssertionMethod": 0,
+          "Value": "All Results",
+          "AssertionType": 0
+        }
+      ],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "Copy test",
+      "Method": "POST",
+      "Url": "{baseurl}{copy-test-path}",
+      "PostBody": "filename={test-file-name}.json&position=1",
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [],
+      "Assertions": [
+        {
+          "Description": "Copy of test should exist",
+          "AssertionMethod": 0,
+          "Value": "Copy of Google Test",
+          "AssertionType": 0
+        }
+      ],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "Delete test",
+      "Method": "POST",
+      "Url": "{baseurl}{delete-test-path}",
+      "PostBody": "filename={test-file-name}.json&position=2",
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [],
+      "Assertions": [
+        {
+          "Description": "Copy of test should exist",
+          "AssertionMethod": 0,
+          "Value": "Copy of Google Test",
+          "AssertionType": 1
+        }
+      ],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "Copy test file",
+      "Method": "POST",
+      "Url": "{baseurl}{copy-test-file-path}",
+      "PostBody": "sourceTestFile={test-file-name}.json&targetTestFile={test-file-copy-name}",
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [],
+      "Assertions": [
+        {
+          "Description": "Copy of test should exist",
+          "AssertionMethod": 0,
+          "Value": "{test-file-copy-name}",
+          "AssertionType": 0
+        }
+      ],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "Delete copy of test file",
+      "Method": "POST",
+      "Url": "{baseurl}{delete-test-file-path}",
+      "PostBody": "filename={test-file-copy-name}.json",
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [],
+      "Assertions": [
+        {
+          "Description": "Should not have test file",
+          "AssertionMethod": 0,
+          "Value": "{test-file-copy-name}",
+          "AssertionType": 1
+        }
+      ],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "Delete original test file",
+      "Method": "POST",
+      "Url": "{baseurl}{delete-test-file-path}",
+      "PostBody": "filename={test-file-name}.json",
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [],
+      "Assertions": [
+        {
+          "Description": "Should not have test file",
+          "AssertionMethod": 0,
+          "Value": "{test-file-name}",
+          "AssertionType": 1
+        }
+      ],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "Check Settings Page",
+      "Method": "GET",
+      "Url": "{baseurl}{settings-path}",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [],
+      "Assertions": [
+        {
+          "Description": "Ensure page loads",
+          "AssertionMethod": 0,
+          "Value": "<h2>System Variables",
+          "AssertionType": 0
+        }
+      ],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "Check Encrypt data page",
+      "Method": "GET",
+      "Url": "{baseurl}{encryption-path}",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [],
+      "Assertions": [
+        {
+          "Description": "Ensure page loads",
+          "AssertionMethod": 0,
+          "Value": "<h1>Encrypt variable data",
+          "AssertionType": 0
+        }
+      ],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    },
+    {
+      "Description": "View all test results for Today",
+      "Method": "GET",
+      "Url": "{baseurl}{todays-results-path}",
+      "PostBody": null,
+      "ExpectedHttpStatusCode": 200,
+      "Headers": [],
+      "CapturedVariables": [
+        {
+          "Name": "test-run-path",
+          "Regex": "<a.*?href=\"(.*?{test-run-guid}.*?)\">View",
+          "PostProcessorType": 1
+        }
+      ],
+      "Assertions": [
+        {
+          "Description": "Should have a test run for test file",
+          "AssertionMethod": 0,
+          "Value": "{test-file-name}",
+          "AssertionType": 0
+        },
+        {
+          "Description": "Should have test GUID on page",
+          "AssertionMethod": 0,
+          "Value": "{test-run-guid}",
+          "AssertionType": 0
+        }
+      ],
+      "ScriptSnippets": {
+        "BeforeExecuteFilename": null
+      }
+    }
+  ],
+  "Variables": [
+    {
+      "Name": "baseurl",
+      "Value": "http://localhost:1980",
+      "Environment": {
+        "Name": ""
+      }
+    },
+    {
+      "Name": "serviceurl",
+      "Value": "http://localhost:1981",
+      "Environment": {
+        "Name": ""
+      }
+    },
+    {
+      "Name": "test-file-name",
+      "Value": "syringe-acceptance-test",
+      "Environment": {
+        "Name": ""
+      }
+    },
+    {
+      "Name": "variable-name",
+      "Value": "TEST-VARIABLE-NAME",
+      "Environment": {
+        "Name": ""
+      }
+    },
+    {
+      "Name": "variable-value",
+      "Value": "TEST-VARIABLE-VALUE",
+      "Environment": {
+        "Name": ""
+      }
+    },
+    {
+      "Name": "test-file-copy-name",
+      "Value": "test-copy-of-syringe-acceptance-test",
+      "Environment": {
+        "Name": ""
+      }
+    }
+  ]
+}
